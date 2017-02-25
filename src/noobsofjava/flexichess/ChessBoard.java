@@ -16,10 +16,7 @@ public class ChessBoard {
     public ChessBoard( int rows, int columns )
     {
         squares = new Square[rows][columns];
-        for(int i=0; i< rows; i++)
-             for(int j=0; j< columns; j++)
-                 squares[i][j]=new Square(i,j);
-    }
+     }
     
     public int rows()
     {
