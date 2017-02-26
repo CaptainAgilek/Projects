@@ -16,6 +16,8 @@ public class ChessBoard {
     public ChessBoard( int rows, int columns )
     {
         squares = new Square[rows][columns];
+        this.rows = rows;
+        this.columns = columns;
      }
     
     public int rows()
