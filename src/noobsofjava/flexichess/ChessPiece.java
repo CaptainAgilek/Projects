@@ -11,6 +11,7 @@ package noobsofjava.flexichess;
  */
 public class ChessPiece {
     private char letter;
+    private Square square;
     private enum Color{
         white,black
     }
@@ -35,5 +36,13 @@ public class ChessPiece {
          return "+" + letter;  
         } 
         else return "-" + letter;
+    }
+    public void setSquare(Square square)
+    {
+        this.square = square;
+    }
+    public Square square()
+    {
+        return square;
     }
 }
