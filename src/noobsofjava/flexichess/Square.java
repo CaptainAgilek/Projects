@@ -11,34 +11,38 @@ package noobsofjava.flexichess;
  */
 public class Square {
     private ChessPiece piece;
-    private int row, column;
-    public Square( int x, int y )
+    private int row;
+    private char column;
+    public Square( char column, int row )
     {
-        row = x;
-        column = y;
+        this.row = row;
+        this.column = column;
     }
-    public void setPiece( ChessPiece piece )
+    public void putPiece( ChessPiece piece )
     {
         this.piece = piece;
     }
     public ChessPiece piece()
     {
         return piece;
+        //if null exception
     }
     public int row()
     {
         return row;
     }
-    public int column()
+    public char column()
     {
         return column;
     }
-    public Boolean isEmpty()
+    public  boolean isEmpty()
     {
         return ( piece == null );
     }
-    public void Clear()
+    public ChessPiece Empty()
     {
+        ChessPiece tmp = piece;
         piece = null;
+        return tmp;
     }
 }
