@@ -10,17 +10,18 @@ package noobsofjava.flexichess;
  * @author Uzivatel
  */
 public class ChessPiece {
-    private Char letter;
+    private 
+        char letter;
     private enum Color{
         white,black
     }
     private Color color;
-    public ChessPiece( Char letter, Color color)
+    public ChessPiece( char letter, Color color)
     {
         this.letter = letter;
         this.color = color;
     }
-    public Char letter()
+    public char letter()
     {
         return letter;
     }
