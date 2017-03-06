@@ -10,7 +10,7 @@ package noobsofjava.flexichess;
  * @author Uzivatel
  */
 public class ChessPiece {
-    private final Char letter;
+    private Char letter;
     private enum Color{
         white,black
     }
