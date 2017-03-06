@@ -42,6 +42,7 @@ public class Square {
     public ChessPiece Empty()
     {
         ChessPiece tmp = piece;
+        piece.setOffBoard();
         piece = null;
         return tmp;
     }
