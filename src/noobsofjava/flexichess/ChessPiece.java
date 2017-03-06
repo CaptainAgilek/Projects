@@ -16,7 +16,7 @@ public class ChessPiece {
         white,black
     }
     private Color color;
-    public ChessPiece( char letter, Color color)
+    public ChessPiece( char letter, ChessPiece.Color color)
     {
         this.letter = letter;
         this.color = color;
