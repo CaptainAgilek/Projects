@@ -10,8 +10,7 @@ package noobsofjava.flexichess;
  * @author Uzivatel
  */
 public class ChessPiece {
-    private 
-        char letter;
+    private char letter;
     private enum Color{
         white,black
     }
@@ -25,8 +24,16 @@ public class ChessPiece {
     {
         return letter;
     }
-    public Color color()
+    public ChessPiece.Color color()
     {
         return color;
+    }
+    public String symbol()
+    {
+        if(color == Color.black) 
+        {
+         return "+" + letter;  
+        } 
+        else return "-" + letter;
     }
 }
