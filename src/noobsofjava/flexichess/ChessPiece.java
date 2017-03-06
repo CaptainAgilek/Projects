@@ -53,5 +53,10 @@ public class ChessPiece {
     {
         return (square = null);
     }
+    @Override
+     public String toString()
+    {
+        return symbol();
+    }
     
 }
