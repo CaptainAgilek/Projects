@@ -13,9 +13,9 @@ public class ChessBoard {
     
     private int rows, columns;
     private Square[][] squares;
-    public ChessBoard( int rows, int columns )
+    public ChessBoard( int columns, int rows )
     {
-        squares = new Square[rows][columns];
+        squares = new Square[columns][rows];
         this.rows = rows;
         this.columns = columns;
      }
@@ -28,7 +28,7 @@ public class ChessBoard {
     {
         return columns;
     }
-    public Square squareAt( int x, int y )
+    public ChessPiece pieceAt( char column, int row )
     {
         return squares[x][y];
     }
