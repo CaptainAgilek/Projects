@@ -45,4 +45,13 @@ public class ChessPiece {
     {
         return square;
     }
+    public void setOffBoard()
+    {
+        square = null;
+    }
+     public boolean isOffBoard()
+    {
+        return (square = null);
+    }
+    
 }
