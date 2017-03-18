@@ -5,8 +5,8 @@ package noobsofjava.flexichess;
  * @author honza
  */
 public class Square {
-	private final char column;
-	private final int row;
+	public final char column;
+	public final int row;
 	private ChessPiece pieceOn;
 	public Square (char column, int row)
 	{
@@ -18,15 +18,6 @@ public class Square {
 	  this.column = str.charAt(0);
 	  this.row = Integer.parseInt(str.substring(1));
 	}
-	public final int row()
-   {
-		return row;
-	}
-	public final char column()
-	{
-		return column;
-	}
-
   @Override
   public int hashCode() {
 	int hash = 7;

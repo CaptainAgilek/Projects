@@ -1,9 +1,8 @@
-import noobsofjava.flexichess.ChessBoard;
-import noobsofjava.flexichess.Square;
+package noobsofjava.flexichess;
 
 public abstract class ChessPiece {
-    public enum Color {white, black};
-    public Color color;
+    public enum Color {WHITE, BLACK};
+    private Color color;
     private char letter;
     private Square onSquare;
     private ChessBoard board;
@@ -18,6 +17,7 @@ public abstract class ChessPiece {
     protected ChessPiece(ChessBoard board, ChessPiece.Color color, char column, int row)
     {
         this.board = board; 
+        this.color = color;
         setPosition(column,row);
     }
      public ChessPiece.Color color()
@@ -30,7 +30,7 @@ public abstract class ChessPiece {
     }
     public String symbol()
     {
-        return  (color == Color.white) ? "+" + letter : "-" + letter;
+        return  (color == Color.WHITE) ? ("+" + letter()) : ("-" + letter());
     }
     public Square position()
     {
@@ -42,11 +42,12 @@ public abstract class ChessPiece {
     {
 		if (square == null)
 			throw new NullPointerException();
-		onSquare = square;		
+		onSquare = square;
     }
     public void setPosition(char column, int row)
     {
-		onSquare = new Square(column,row);		
+		onSquare = new Square(column,row);
+                board.putPiece(column,row, this);
     }
     public boolean isOffBoard()
     {

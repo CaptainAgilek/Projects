@@ -5,100 +5,77 @@
  */
 package noobsofjava.flexichess;
 
-/**
- *
- * @author Uzivatel
- */
 public class ChessBoardAsString {
-    private int rows, columns;
-    private ChessBoard board;
-    public ChessBoardAsString( ChessBoard board )
-    {
-        rows = board.rows();
-        columns = board.columns();
-        this.board = board;
-    }  
-    public String get()
-    {
-        StringBuffer boardBuffer = new StringBuffer();
-		if (rows == 0)
-			return boardBuffer.toString();
-		boardBuffer.append(" ");
-    for (int i=0; i<columns; i++)
-	  boardBuffer.append("   " + i);
-    boardBuffer.append(" " + "\n");
-    for (int i=0; i < rows*2+1; i++)
-		{
-			if (i == 0)
-			{
-				boardBuffer.append("  ");
-				for(int j=0; j< columns*4+1; j++)
-				{
-					if (j == 0)
-						boardBuffer.append("\u250C");
-					else if (j == columns*4)
-						boardBuffer.append("\u2510" + "\n");
-					else if (j % 4 == 0 )
-						boardBuffer.append("\u252C"); 
-					else 
-						boardBuffer.append("\u2500");
-				}
-			}
-			else if (i == rows*2)
-			{
-				boardBuffer.append("  ");
-			  for(int j=0; j< columns*4+1; j++)
-			  {
-					if (j == 0)
-						boardBuffer.append("\u2514");
-					else if (j == columns*4)
-						boardBuffer.append("\u2518");
-					else if (j % 4 == 0 )
-						boardBuffer.append("\u2534"); 
-					else 
-						boardBuffer.append("\u2500");
-				}
-			}
-			else if (i % 2 == 1)
-			{
-				boardBuffer.append((i/2) + " ");
-				for(int j=0; j< columns*4+1; j++)
-				{
-					if (j == columns*4)
-						boardBuffer.append("\u2502" + "\n");
-					else if (j % 4 == 0)
-						boardBuffer.append("\u2502");
-					else
-		    	{ 
-		   			if ((j-2) % 4 != 0)
-				 			boardBuffer.append(" ");
-		        else
-		        {
-		        	//if (board.squareAt(i/2,(j-2)/4).isEmpty())
-		        		boardBuffer.append(" ");
-		        	//else
-		          	//boardBuffer.append(board.squareAt(i/2, (j-2)/4).piece());
-		      	}
-					}
-		  	}
-			}
-			else
-			{
-				boardBuffer.append("  ");
-				for(int j=0; j< columns*4+1; j++)
-				{
-					if (j == 0)
-						boardBuffer.append("\u251C");
-			 		else if (j == columns*4)
-				 		boardBuffer.append("\u2524" + "\n");
-			 		else if (j % 4 == 0 )
-					 	boardBuffer.append("\u253C"); 
-			 		else 
-				 		boardBuffer.append("\u2500");
-				}
-			}
-		}
-    return boardBuffer.toString();
+	ChessBoard board;
+  public ChessBoardAsString (ChessBoard board) 
+	{
+	  this.board = board;
+	}
+   @Override
+	public String toString()
+	{
+		StringBuffer buffer = new StringBuffer(); // String pro předání
+    int row = board.rows(); // řádky
+    int col = board.columns();  // sloupce
+    buffer.append("   ");
+    buffer.append("┌"); // první řádek tabulky
+    for (int j = 0; j < col; j++) {
+      if (j != col - 1) {
+        buffer.append("───┬");
+      } 
+			else {
+        buffer.append("───┐\n");
+      }
     }
-    
+    for (int i = 0; i < row; i++) { // začátek prostředku
+      buffer.append(String.format("%2d ", row-i));
+      for (int j = 0; j < col; j++) { // prostřední chlívky 
+        if (j != col - 1) {
+          buffer.append(!board.isEmptyAt((char)(j+97), row-i) ? String.format("│%s ", board.pieceAt((char)(j+97), row-i).symbol()) : "│   "); // podmínka zkouší zda na určeném místě je nula pokud ano nic nepíše, v opačném případě zapíše číslo
+				}
+				else {
+          buffer.append(!board.isEmptyAt((char)(j+97), row-i) ? String.format("│%s │\n", board.pieceAt((char)(j+97), row-i).symbol()) : "│   │\n");
+        }
+      }
+      if (i != row - 1) { // kontoluje zda je koneec
+        buffer.append("   ├");
+      } 
+			else {
+				buffer.append("   └");
+      }
+      for (int j = 0; j < col; j++) {
+        if (i != row - 1) { // kontoluje za je konec
+					if (j != col - 1) {
+            buffer.append("───┼");
+          } 
+					else {
+            buffer.append("───┤\n");
+          }
+        }
+				else if (j != col - 1) {
+          buffer.append("───┴");
+        } 
+				else {
+          buffer.append("───┘\n");
+        }
+
+      }
+    }
+		buffer.append("     ");
+		for (int i = 0; i < col; i++) { //čísla sloupců
+      if (i == col - 1) {
+        buffer.append(String.format("%c ", (char)('a'+i)));
+      }
+			else {
+				buffer.append(String.format("%c   ", (char)('a'+i)));
+      }
+		}
+             buffer.append("\nW+:"); 
+             for(int i = 0; i < board.capturedPieces(ChessPiece.Color.WHITE).size();i++)
+                 buffer.append(" "+board.capturedPieces(ChessPiece.Color.WHITE).get(i).letter());
+             buffer.append("\nB-:"); 
+             for(int i = 0; i < board.capturedPieces(ChessPiece.Color.BLACK).size();i++)
+                 buffer.append(" "+board.capturedPieces(ChessPiece.Color.BLACK).get(i).letter());
+    return buffer.toString();
+	}
 }

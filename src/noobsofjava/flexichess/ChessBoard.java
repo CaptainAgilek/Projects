@@ -25,19 +25,19 @@ public class ChessBoard
   }
   public void putPiece(char column, int row, ChessPiece piece)
   {
-		if (this.isEmptyAt(column, row))
+		if (!isEmptyAt(column, row))
 			throw new IllegalStateException();
 		board[rows-row][column-97] = piece;
   }
   public ChessPiece pieceAt(char column, int row)
   {
-		if (this.isEmptyAt(column, row))
+                   if (isEmptyAt(column, row))
 			throw new IllegalStateException();
 		return board[rows-row][column-97];
   }
   public ChessPiece emptySquare(char column, int row)
   {
-        if (this.isEmptyAt(column, row))
+        if (isEmptyAt(column, row))
 	  throw new IllegalStateException();
         ChessPiece cleared = board[rows-row][column-97];
         board[rows-row][column-97].setOffBoard();
@@ -55,7 +55,7 @@ public ChessPiece capturePieceAt(char column, int row)
 }
 public void returnLastCapturedTo(char column, int row)
 {
-    board[column][row] =  capturedPiecesStack.pop();
+    board[rows-row][column-97] =  capturedPiecesStack.pop();
 }
 public List<ChessPiece> capturedPieces()
 {
@@ -65,9 +65,16 @@ public List<ChessPiece> capturedPieces(ChessPiece.Color color)
 {
     List<ChessPiece> capturedColor = new ArrayList<ChessPiece>();
    for (int i = 0; i < capturedPiecesStack.size(); i++) {
-      // if(capturedPiecesStack.)
+       if(capturedPiecesStack.get(i).color() == color)
+           capturedColor.add(capturedPiecesStack.get(i));
     }
-    return new ArrayList<ChessPiece>(capturedColor);
+    return capturedColor;
+}
+ public void moveTo(char fromColumn, int fromRow, char toColumn, int toRow)
+{
+    if( !isEmptyAt(toColumn, toRow))
+        throw new IllegalStateException();
+    board[rows-toRow][toColumn-97] = emptySquare(fromColumn, fromRow);
 }
 @Override
   public String toString()
@@ -75,4 +82,6 @@ public List<ChessPiece> capturedPieces(ChessPiece.Color color)
 		ChessBoardAsString string = new ChessBoardAsString(this);
 		return string.toString();
   }
+
+   
 }
