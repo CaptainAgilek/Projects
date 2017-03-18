@@ -3,7 +3,6 @@ package noobsofjava.flexichess;
 public abstract class ChessPiece {
     public enum Color {WHITE, BLACK};
     private Color color;
-    private char letter;
     private Square onSquare;
     private ChessBoard board;
 
