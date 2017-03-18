@@ -74,10 +74,10 @@ public class ChessBoardAsString {
 				 			boardBuffer.append(" ");
 		        else
 		        {
-		        	if (board.squareAt(i/2,(j-2)/4).isEmpty())
+		        	//if (board.squareAt(i/2,(j-2)/4).isEmpty())
 		        		boardBuffer.append(" ");
-		        	else
-		          	boardBuffer.append(board.squareAt(i/2, (j-2)/4).piece());
+		        	//else
+		          	//boardBuffer.append(board.squareAt(i/2, (j-2)/4).piece());
 		      	}
 					}
 		  	}

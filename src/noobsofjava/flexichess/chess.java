@@ -10,12 +10,10 @@ package noobsofjava.flexichess;
  * @author Uzivatel
  */
 public class chess {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+   public static void main(String[] args)
+	{
+	  
+	}
+	
+ 
 }

@@ -1,62 +1,67 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package noobsofjava.flexichess;
+import noobsofjava.flexichess.ChessBoard;
+import noobsofjava.flexichess.Square;
 
-/**
- *
- * @author Uzivatel
- */
-public class ChessPiece {
+public abstract class ChessPiece {
+    public enum Color {white, black};
+    public Color color;
     private char letter;
-    private Square square;
-    private enum Color{
-        white,black
-    }
-    private Color color;
-    public ChessPiece( char letter, ChessPiece.Color color)
+    private Square onSquare;
+    private ChessBoard board;
+
+
+    protected ChessPiece(ChessBoard board, ChessPiece.Color color)
     {
-        this.letter = letter;
+        this.board = board;
         this.color = color;
+        onSquare = null;
     }
-    public char letter()
+    protected ChessPiece(ChessBoard board, ChessPiece.Color color, char column, int row)
     {
-        return letter;
+        this.board = board; 
+        setPosition(column,row);
     }
-    public ChessPiece.Color color()
+     public ChessPiece.Color color()
     {
-        return color;
+        return this.color;
+    }
+    public ChessBoard board()
+    {
+        return board;
     }
     public String symbol()
     {
-        if(color == Color.black) 
-        {
-         return "+" + letter;  
-        } 
-        else return "-" + letter;
+        return  (color == Color.white) ? "+" + letter : "-" + letter;
     }
-    public void setSquare(Square square)
+    public Square position()
     {
-        this.square = square;
+		if (isOffBoard())
+			throw new IllegalStateException();
+		return onSquare;
     }
-    public Square square()
+    public void setPosition(Square square)
     {
-        return square;
+		if (square == null)
+			throw new NullPointerException();
+		onSquare = square;		
+    }
+    public void setPosition(char column, int row)
+    {
+		onSquare = new Square(column,row);		
+    }
+    public boolean isOffBoard()
+    {
+	return onSquare == null;
     }
     public void setOffBoard()
     {
-        square = null;
-    }
-     public boolean isOffBoard()
-    {
-        return (square = null);
+	onSquare = null;
     }
     @Override
-     public String toString()
+    public String toString()
     {
-        return symbol();
+	return symbol();
     }
+      public abstract char letter();
+      
     
 }
