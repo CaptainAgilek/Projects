@@ -7,13 +7,15 @@ public class ChessBoard
 {
   private int rows, columns;
   private ChessPiece[][] board; 
+  private King whiteKing,blackKing;
   private Stack<ChessPiece> capturedPiecesStack = new Stack<ChessPiece>();
-  public ChessBoard(int columns, int rows)
+  public ChessBoard(int columns, int rows,Square whiteKingPos, Square blackKingPos)
   {
-		board = new ChessPiece[rows][columns];
-		
+		board = new ChessPiece[rows][columns];	
 		this.rows = rows;
 		this.columns = columns;
+                whiteKing = new King(this, ChessPiece.Color.WHITE, whiteKingPos.column, whiteKingPos.row);
+                blackKing = new King(this, ChessPiece.Color.BLACK, blackKingPos.column, blackKingPos.row);
   }
   public int rows()
   {
@@ -81,6 +83,16 @@ public List<ChessPiece> capturedPieces(ChessPiece.Color color)
   {
 		ChessBoardAsString string = new ChessBoardAsString(this);
 		return string.toString();
+  }
+  public boolean isInsideBoard(char column, int row)
+  {
+	if ( (row > 0 && row <= rows) && ((column-97) > 0 && (column-97) <= columns) )
+	  return true;
+	else return false;
+  }
+  public King king(ChessPiece.Color color)
+  {
+      return color == color.WHITE ? whiteKing : blackKing;
   }
 
    

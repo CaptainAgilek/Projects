@@ -62,6 +62,6 @@ public abstract class ChessPiece {
 	return symbol();
     }
       public abstract char letter();
-      
+      public abstract <T> T accept(ChessPieceVisitor<T> visitor);
     
 }
