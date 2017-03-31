@@ -14,7 +14,6 @@ import java.util.Objects;
 public class SimpleMove implements Move{
     private ChessPiece piece;
     private Square from,to;
-    private boolean captured = false;
     public SimpleMove(ChessPiece piece, Square to)
     {
         this.piece = piece;
@@ -34,26 +33,24 @@ public class SimpleMove implements Move{
     }
     @Override
     public void executeOnBoard(ChessBoard board) {
-        if( !board.isEmptyAt(to.column, to.row))
-        {
-            captured = true;
+        if( isCapturing())
             board.capturePieceAt(to.column, to.row);
-        }
+      
          piece.setPosition(to);
     }
 
     @Override
     public void revertOnBoard(ChessBoard board) {
         if(isCapturing())
-        {
-            captured = false;
             board.returnLastCapturedTo(to.column, to.row);
-        }
+        
         piece.setPosition(from);
     }
     public boolean isCapturing()
     {
-        return captured;
+       if(!piece.board.isEmptyAt(to.column, to.row))
+            return true;          
+         return false;
     }
     @Override
     public String notation() {
